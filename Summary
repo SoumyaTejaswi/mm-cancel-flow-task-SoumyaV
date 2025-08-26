@@ -1,0 +1,109 @@
+Step by Step of what I did:
+
+1.Install Dependencies: npm install
+2.Installed Supabase CLI(Via Homebrew) : brew install supabase/tap/supabase
+3.Install Docker Desktop(required for Supabase) : brew install --cask docker
+4.Initialize supabase : supabase init
+5.Started Local Supabase : supabase start
+6.Set up Database Schema:PGPASSWORD=postgres psql -h localhost -p 54322 -U postgres -d postgres -f seed.sql
+7.Created Envirorment file(.env.local)
+8.Started the Development Server.
+
+How to Run This Application
+
+Prerequisites
+
+Before running the application, ensure you have the following installed:
+
+1.Node.js (v18 or higher)
+
+2.npm (comes with Node.js)
+
+3.Docker Desktop (required for local Supabase)
+
+4.Supabase CLI
+
+Installation Steps(on bash)
+
+1.Install Supabase CLI:
+brew install supabase/tap/supabase
+On other systems, visit: https://supabase.com/docs/guides/cli
+
+2.Install Docker Desktop:
+brew install --cask docker
+On other systems, visit: https://www.docker.com/products/docker-desktop
+
+3.Clone and Setup Project:
+cd cancel-flow-task-main
+npm install
+
+4.Environment Configuration
+Create a .env.local file in the project root:
+NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_local_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_local_service_role_key
+
+Running the Application
+
+Option 1: Quick Start (Recommended):
+npm run db:setup
+npm run dev
+
+Option 2: Manual Setup:
+supabase start
+PGPASSWORD=postgres psql -h localhost -p 54322 -U postgres -d postgres -f seed.sql
+npm run dev
+
+Accessing the Application
+
+-Next.js Development Server: http://localhost:3000
+
+-Supabase Local Database: http://localhost:54322
+
+-Supabase Studio: http://localhost:54323
+
+Available Scripts
+
+npm run dev          # Start development server with Turbopack
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run db:setup     # Start Supabase and setup database
+npm run db:reset     # Reset database to initial state
+npm run db:setup:remote  # Setup remote database
+
+Troubleshooting
+
+1.Port conflicts: If ports 3000, 54321, 54322, or 54323 are in use, stop other services using these ports.
+2.Docker not running: Ensure Docker Desktop is running before starting Supabase.
+3.Database connection issues:
+supabase stop
+supabase start
+
+4.Permission issues: On macOS/Linux, you might need to run with sudo for database operations.
+Reset Everything
+supabase stop
+supabase db reset
+npm run db:setup
+
+Development Workflow:
+1.Start development: npm run dev
+
+2.Access the app: Open http://localhost:3000
+
+3.Test cancellation flow: Navigate to /cancel route
+
+4.Monitor database: Use Supabase Studio at http://localhost:54323
+
+5.View logs: Check terminal for Next.js and Supabase logs
+
+Production Deployment
+
+1.Build the application:
+npm run build
+npm run start
+
+2.Setup production database:
+npm run db:setup:remote
+
+3.Configure environment variables for your production Supabase instance.
